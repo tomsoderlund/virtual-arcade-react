@@ -2,24 +2,51 @@
   "name": "virtual-arcade-react",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
-  },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "dev2": "nodemon -w server -w package.json server/server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "heroku-postbuild": "yarn build",
+    "start": "node server/server.js",
+    "test": "echo 'Running Standard.js and Jasmine unit tests...\n' && yarn lint && yarn unit",
+    "eject": "react-scripts eject",
+    "lint": "standard",
+    "fix": "standard --fix"
   },
+  "proxy": "http://localhost:3333",
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "standard": {
+    "ignore": [
+      ".next"
+    ],
+    "globals": [
+      "beforeAll",
+      "beforeEach",
+      "describe",
+      "expect",
+      "it",
+      "jasmine",
+      "spyOn",
+      "fetch"
+    ]
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "dependencies": {
+    "express": "^4.16.4",
+    "path": "^0.12.7",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "2.1.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11",
+    "standard": "^12.0.1"
+  }
 }
