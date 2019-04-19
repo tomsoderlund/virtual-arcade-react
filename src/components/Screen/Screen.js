@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './App.css'
-import socket from '../lib/socketClient'
+import './Screen.css'
+import socket from '../../lib/socketClient'
 
 class App extends Component {
   constructor (props) {
