@@ -18,7 +18,7 @@ module.exports = {
 
     socket.on('chat message', function (msg) {
       console.log('chat message: ' + msg)
-      io.emit('chat message', msg)
+      io.emit('chat message', 'Reply: ' + msg)
     })
 
     socket.on('position', function (msg) {

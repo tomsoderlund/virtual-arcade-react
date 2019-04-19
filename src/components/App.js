@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import openSocket from 'socket.io-client'
 import './App.css'
 
-const socket = openSocket('http://localhost:8888')
-
+const socket = window.io()
 socket.on('chat message', function (msg) {
   console.log('chat message: ' + msg)
-  io.emit('chat message', msg)
 })
 
 class App extends Component {
   componentDidMount () {
     console.log(`componentDidMount:`, socket)
+    socket.emit('chat message', 'hello')
   }
 
   render () {
