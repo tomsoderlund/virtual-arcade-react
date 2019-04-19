@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Gamepad on iPhone X](graphics/Gamepad on iPhone X.jpg)
+![Gamepad on iPhone X](graphics/Gamepad_on_iPhone_X.jpg)
 
 ## Deploying on Heroku
 
