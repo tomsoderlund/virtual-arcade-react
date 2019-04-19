@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+
 import './Screen.css'
 import socket from '../../lib/socketClient'
 
-class App extends Component {
+class Screen extends Component {
   constructor (props) {
     super(props)
     this.state = { message: '' }
@@ -23,7 +25,7 @@ class App extends Component {
 
   render () {
     return (
-      <div className='App'>
+      <div className='Screen'>
         Virtual Arcade
         <p>
           Message: {this.state.message}
@@ -31,9 +33,10 @@ class App extends Component {
         <p>
           <button onClick={this.handleSend.bind(this)}>Send</button>
         </p>
+        <Link to='/gamepad'>Show gamepad</Link>
       </div>
     )
   }
 }
 
-export default App
+export default Screen
