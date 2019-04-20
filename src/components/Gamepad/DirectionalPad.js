@@ -6,7 +6,7 @@ export default (props) => <DpadOuter>
 </DpadOuter>
 
 const DpadOuter = styled.div`
-  font-size: 30vw;
+  font-size: 40vw;
   width: 1em;
   height: 1em;
   border-radius: 50%;
@@ -16,12 +16,12 @@ const DpadOuter = styled.div`
 `
 
 const DpadInner = styled.div`
-  width: 0.333em;
-  height: 0.333em;
+  width: 0.4em;
+  height: 0.4em;
   border-radius: 50%;
   background-color: #EDEDED;
   box-shadow: 0 0.010em 0.04em 0 rgba(0,0,0,0.40);
   position: absolute;
-  left: 0.35em;
-  top: 0.35em;
+  left: 0.3em;
+  top: 0.3em;
 `
