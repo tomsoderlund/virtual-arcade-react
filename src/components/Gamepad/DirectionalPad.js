@@ -1,8 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Draggable from './Draggable'
+
 export default (props) => <DpadOuter>
-  <DpadInner />
+  <BoundingBox>
+    <Draggable>
+      <DpadInner />
+    </Draggable>
+  </BoundingBox>
 </DpadOuter>
 
 const DpadOuter = styled.div`
@@ -24,4 +30,14 @@ const DpadInner = styled.div`
   position: absolute;
   left: 0.3em;
   top: 0.3em;
+`
+
+const BOUNDING_SIZE = 0.8
+
+const BoundingBox = styled.div`
+  width: ${BOUNDING_SIZE}em;
+  height: ${BOUNDING_SIZE}em;
+  position: absolute;
+  left: ${(1 - BOUNDING_SIZE) / 2}em;
+  top: ${(1 - BOUNDING_SIZE) / 2}em;
 `
