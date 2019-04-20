@@ -2,8 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import Screen from './Screen/Screen'
-
-const Gamepad = ({ children }) => <div>Gamepad</div>
+import Gamepad from './Gamepad/Gamepad'
 
 export default () => (
   <Router>

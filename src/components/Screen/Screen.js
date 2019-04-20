@@ -26,7 +26,7 @@ class Screen extends Component {
   render () {
     return (
       <div className='Screen'>
-        Virtual Arcade
+        <h1>Virtual Arcade</h1>
         <p>
           Message: {this.state.message}
         </p>
