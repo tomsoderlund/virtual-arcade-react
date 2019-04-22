@@ -5,14 +5,13 @@
  * @author Tom Söderlund
  */
 
+let dummyEventHandlers = {}
+
 const socketDummy = {
-  on: () => {},
-  emit: () => {}
+  on: (type, func) => { dummyEventHandlers[type] = func; console.log({ dummyEventHandlers }) },
+  emit: (type, obj) => { dummyEventHandlers[type] && dummyEventHandlers[type](obj) }
 }
 
 const socket = window.io ? window.io() : socketDummy
-socket.on('chat message', function (msg) {
-  console.log('chat message: ' + msg)
-})
 
 export default socket

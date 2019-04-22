@@ -6,8 +6,9 @@ import socket from '../../lib/socketClient'
 import DirectionalPad from './DirectionalPad'
 import ActionButton from './ActionButton'
 
-const BUTTON_DOWN = 1
-const BUTTON_UP = 0
+export const BUTTON_DOWN = 1
+export const BUTTON_UP = 0
+const CENTER_VALUE = 0.5
 
 const COOKIE_NAME = 'game-playername'
 
@@ -17,8 +18,8 @@ export default class Gamepad extends Component {
     this.playerName = null
     this.state = {
       movement: {
-        x: 0,
-        y: 0
+        x: CENTER_VALUE,
+        y: CENTER_VALUE
       }
     }
   }
@@ -38,20 +39,20 @@ export default class Gamepad extends Component {
   }
 
   handleMove (relativePosition, position) {
-    console.log(`handleMove:`, relativePosition)
+    // console.log(`handleMove:`, relativePosition)
     this.setState({ movement: relativePosition })
     socket.emit('move', { playerName: this.playerName, movement: relativePosition })
   }
 
   handleStopMove () {
-    console.log(`handleStopMove`)
-    this.setState({ movement: { x: 0, y: 0 } })
-    socket.emit('move', { playerName: this.playerName, movement: { x: 0, y: 0 } })
+    // console.log(`handleStopMove`)
+    this.setState({ movement: { x: CENTER_VALUE, y: CENTER_VALUE } })
+    socket.emit('move', { playerName: this.playerName, movement: { x: CENTER_VALUE, y: CENTER_VALUE } })
   }
 
-  handleButton (buttonDown, event) {
-    console.log(`handleButton:`, buttonDown)
-    socket.emit('button', { playerName: this.playerName, buttonDown })
+  handleButton (isButtonDown, event) {
+    // console.log(`handleButton:`, isButtonDown)
+    socket.emit('button', { playerName: this.playerName, button: isButtonDown })
   }
 
   render () {

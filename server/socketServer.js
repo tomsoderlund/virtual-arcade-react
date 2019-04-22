@@ -10,10 +10,10 @@
 module.exports = {
 
   connection: function (io, socket) {
-    console.log('Socket.io: a user connected', socket.id)
+    console.log('user connected', socket.id)
 
     socket.on('disconnect', function () {
-      console.log('user disconnected', arguments)
+      console.log('user disconnected', socket.id)
     })
 
     const bounceBackMessage = (eventName, obj) => {
