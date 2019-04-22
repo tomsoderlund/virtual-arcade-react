@@ -56,6 +56,7 @@ export default class Draggable extends React.Component {
   }
 
   handleMove (event) {
+    event.preventDefault()
     // x, y, clientX, clientY, movementX, movementY, pageX, pageY, screenX, screenY AND layerX, layerY, offsetX, offsetY
     const { clientX, clientY } = event.targetTouches ? event.targetTouches[0] : event
     if (this.state.isMoving) {
@@ -68,7 +69,7 @@ export default class Draggable extends React.Component {
         x: (position.x - this.props.padding.left) / (this.parentElement.offsetWidth - this.targetElement.getBoundingClientRect().width - this.props.padding.right - 2), // why -2 needed ?!
         y: (position.y - this.props.padding.top) / (this.parentElement.offsetHeight - this.targetElement.getBoundingClientRect().height - this.props.padding.bottom)
       }
-      if (this.props.onChange) this.props.onChange(relativePosition)
+      if (this.props.onChange) this.props.onChange(relativePosition, position)
       this.targetElement.style.left = `${position.x}px`
       this.targetElement.style.top = `${position.y}px`
     }
@@ -80,6 +81,7 @@ export default class Draggable extends React.Component {
     window.document.removeEventListener('mouseup', this.state.listeners.end)
     window.document.removeEventListener('touchmove', this.state.listeners.move)
     window.document.removeEventListener('touchend', this.state.listeners.end)
+    if (this.props.onEnd) this.props.onEnd()
   }
 
   render () {
@@ -87,6 +89,7 @@ export default class Draggable extends React.Component {
       onMouseDown={this.handleStart.bind(this)}
       onTouchStart={this.handleStart.bind(this)}
       ref={this.setDraggableElement}
+      style={{ cursor: 'pointer' }}
     >
       {this.props.children}
     </div>

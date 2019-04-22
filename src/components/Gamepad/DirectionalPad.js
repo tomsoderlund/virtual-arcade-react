@@ -3,10 +3,13 @@ import styled from 'styled-components'
 
 import Draggable from './Draggable'
 
-export default (props) => <DpadOuter>
+export default ({ onChange, onEnd }) => <DpadOuter>
   <BoundingBox>
-    <Draggable>
-      <DpadInner />
+    <Draggable
+      onChange={onChange}
+      onEnd={onEnd}
+    >
+      <DpadHandle />
     </Draggable>
   </BoundingBox>
 </DpadOuter>
@@ -19,9 +22,10 @@ const DpadOuter = styled.div`
   background-color: #FFFFFF;
   box-shadow: inset 0 0.005em 0.02em 0 rgba(0,0,0,0.40);
   position: relative;
+  user-select: none;
 `
 
-const DpadInner = styled.div`
+const DpadHandle = styled.div`
   width: 0.4em;
   height: 0.4em;
   border-radius: 50%;
@@ -30,6 +34,7 @@ const DpadInner = styled.div`
   position: absolute;
   left: 0.3em;
   top: 0.3em;
+  user-select: none;
 `
 
 const BOUNDING_SIZE = 0.8
@@ -40,4 +45,5 @@ const BoundingBox = styled.div`
   position: absolute;
   left: ${(1 - BOUNDING_SIZE) / 2}em;
   top: ${(1 - BOUNDING_SIZE) / 2}em;
+  user-select: none;
 `

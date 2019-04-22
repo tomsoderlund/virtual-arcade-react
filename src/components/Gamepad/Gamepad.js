@@ -4,19 +4,50 @@ import styled from 'styled-components'
 import DirectionalPad from './DirectionalPad'
 import ActionButton from './ActionButton'
 
+const BUTTON_DOWN = 1
+const BUTTON_UP = 0
+
 export default class Gamepad extends Component {
   constructor (props) {
     super(props)
-    this.state = { isLoading: false }
+    this.state = {
+      movement: {
+        x: 0,
+        y: 0
+      }
+    }
+  }
+
+  handleMove (relativePosition, position) {
+    console.log(`handleMove:`, relativePosition)
+    this.setState({ movement: relativePosition })
+  }
+
+  handleStopMove () {
+    console.log(`handleStopMove`)
+    this.setState({ movement: {
+      x: 0,
+      y: 0
+    } })
+  }
+
+  handleButton (buttonDown, event) {
+    console.log(`handleButton:`, buttonDown)
   }
 
   render () {
     return <GamepadBackground>
       <GamepadSection>
-        <DirectionalPad />
+        <DirectionalPad
+          onChange={this.handleMove.bind(this)}
+          onEnd={this.handleStopMove.bind(this)}
+        />
       </GamepadSection>
       <GamepadSection>
-        <ActionButton />
+        <ActionButton
+          onButtonDown={this.handleButton.bind(this, BUTTON_DOWN)}
+          onButtonUp={this.handleButton.bind(this, BUTTON_UP)}
+        />
       </GamepadSection>
     </GamepadBackground>
   }
