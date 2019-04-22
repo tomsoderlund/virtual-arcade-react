@@ -41,9 +41,11 @@
   ],
   "dependencies": {
     "express": "^4.16.4",
+    "js-cookie": "^2.2.0",
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-game-kit": "^1.0.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "socket.io": "^2.2.0",

@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { Loop, Stage } from 'react-game-kit'
 
 import './Screen.css'
 import socket from '../../lib/socketClient'
+
+import GameScreen from '../../games/Game1/GameScreen'
 
 class Screen extends Component {
   constructor (props) {
@@ -11,29 +14,29 @@ class Screen extends Component {
   }
 
   componentDidMount () {
-    console.log(`componentDidMount:`, socket)
-    socket.on('chat message', this.handleReceive.bind(this))
+    socket.on('join', this.handleReceive.bind(this))
+    socket.on('leave', this.handleReceive.bind(this))
+    socket.on('move', this.handleReceive.bind(this))
+    socket.on('button', this.handleReceive.bind(this))
   }
 
   handleSend () {
-    socket.emit('chat message', 'hello')
   }
 
-  handleReceive (message) {
-    this.setState({ message })
+  handleReceive () {
+    console.log(`handleReceive:`, arguments)
   }
 
   render () {
     return (
       <div className='Screen'>
         <h1>Virtual Arcade</h1>
-        <p>
-          Message: {this.state.message}
-        </p>
-        <p>
-          <button onClick={this.handleSend.bind(this)}>Send</button>
-        </p>
         <Link to='/gamepad'>Show gamepad</Link>
+        <Loop>
+          <Stage>
+            <GameScreen />
+          </Stage>
+        </Loop>
       </div>
     )
   }
