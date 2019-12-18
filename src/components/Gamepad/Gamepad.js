@@ -74,14 +74,17 @@ export default class Gamepad extends Component {
 }
 
 const GamepadBackground = styled.main`
+  user-select: none;
+  -webkit-user-select: none;
   background-color: #EDEDED;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 `
 
 const GamepadSection = styled.div`

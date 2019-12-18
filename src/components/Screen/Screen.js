@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Loop, Stage } from 'react-game-kit'
+import { Loop /* Stage */ } from 'react-game-kit'
 import styled from 'styled-components'
 import { set } from 'lodash'
 

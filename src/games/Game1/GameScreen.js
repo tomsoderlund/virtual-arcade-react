@@ -6,6 +6,7 @@ import { get, set } from 'lodash'
 import { BUTTON_DOWN } from '../../components/Gamepad/Gamepad'
 
 const START_POSITION = 100
+const SPEED_FACTOR = 2.0
 
 export default class GameScreen extends Component {
   static contextTypes = {
@@ -27,18 +28,20 @@ export default class GameScreen extends Component {
 
   // Tick logic
   update () {
-    //console.log(`Players:`, this.props.players)
+    const { players } = this.props
+    // console.log(`Players:`, players)
     const characters = {...this.state.characters}
-    for (let playerName in this.props.players) {
-      set(characters, `${playerName}.color`, this.props.players[playerName].color)
-      set(characters, `${playerName}.speed`, this.props.players[playerName].movement)
-      if (this.props.players[playerName].button === BUTTON_DOWN && !get(characters, `${playerName}.button`)) {
+    for (let playerName in players) {
+      set(characters, `${playerName}.playerName`, playerName)
+      set(characters, `${playerName}.color`, players[playerName].color)
+      set(characters, `${playerName}.speed`, players[playerName].movement)
+      if (players[playerName].button === BUTTON_DOWN && !get(characters, `${playerName}.button`)) {
         console.log(`Fire!`)
       }
-      set(characters, `${playerName}.button`, this.props.players[playerName].button)
+      set(characters, `${playerName}.button`, players[playerName].button)
       // Calculate position
-      set(characters, `${playerName}.position.x`, get(characters, `${playerName}.position.x`, START_POSITION) + get(characters, `${playerName}.speed.x`, 0))
-      set(characters, `${playerName}.position.y`, get(characters, `${playerName}.position.y`, START_POSITION) + get(characters, `${playerName}.speed.y`, 0))
+      set(characters, `${playerName}.position.x`, get(characters, `${playerName}.position.x`, START_POSITION) + get(characters, `${playerName}.speed.x`, 0) * SPEED_FACTOR)
+      set(characters, `${playerName}.position.y`, get(characters, `${playerName}.position.y`, START_POSITION) + get(characters, `${playerName}.speed.y`, 0) * SPEED_FACTOR)
       // Update state
       this.setState({ characters })
     }
@@ -46,7 +49,19 @@ export default class GameScreen extends Component {
 
   render () {
     return <GameScreenBox>
-      {Object.values(this.state.characters).map((character, index) => <Character key={character.color} style={{ left: get(character, 'position.x', 0), top: get(character, 'position.y', 0) }} color={character.color}></Character>)}
+      {Object.values(this.state.characters).map((character, index) => (
+        <Character
+          key={index}
+          style={{
+            left: get(character, 'position.x', 0),
+            top: get(character, 'position.y', 0)
+          }}
+          color={character.color}
+          title={`Character #${index}`}
+        >
+          {character.playerName}
+        </Character>
+      ))}
     </GameScreenBox>
   }
 }
@@ -63,4 +78,9 @@ const Character = styled.div`
   height: 3em;
   border-radius: 50%;
   background-color: ${props => props.color};
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 `
