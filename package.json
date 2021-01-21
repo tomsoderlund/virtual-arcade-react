@@ -49,7 +49,7 @@
     "react-game-kit": "^1.0.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
