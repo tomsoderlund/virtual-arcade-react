@@ -40,7 +40,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "path": "^0.12.7",
